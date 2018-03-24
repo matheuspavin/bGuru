@@ -57,11 +57,19 @@ const getOrdersByAddress = async function (customerAddress) {
     return orders;
 };
 
+const getOrderedItens = async function () {
+    const sql = `SELECT ordered_item, COUNT (*) as quantity from orders
+                 GROUP BY ordered_item
+                 ORDER BY quantity DESC`;
+    return databaseService.query(sql, []);
+};
+
 module.exports = {
     insertOrder,
     getAll,
     getOrderById,
     deleteOrderById,
     getOrdersByCompany,
-    getOrdersByAddress
+    getOrdersByAddress,
+    getOrderedItens
 }

@@ -62,4 +62,14 @@ router.post('/address', async function(req, res, next){
     }
 });
 
+router.get('/itens/orderedItens', async function (req, res, next) {
+    try {
+        let result = await ordersService.getOrderedItens();
+        return res.json(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 module.exports = router;
