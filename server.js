@@ -19,6 +19,12 @@ app.all('*', function(req, res, next) {
 
 app.use('/orders', ordersRoute);
 
+const errorHandler = function (err, req, res, next) {
+	console.error('Error:', err);
+	res.status(500).send({ message: "server error" });
+};
+
+app.use(errorHandler);
 app.listen(port);
 
 console.log('API started on: ' + port);
