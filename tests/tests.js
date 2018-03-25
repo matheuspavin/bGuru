@@ -20,7 +20,8 @@ before(async function () {
             company_name text NOT NULL, 
             company_address text, 
             company_register text,
-            company_country text)`;
+            company_country text,
+            active integer DEFAULT 1)`;
     await databaseService.execute(creatCompanies, []);
     
     await testOrders.orders.forEach(async order =>  {
@@ -94,30 +95,42 @@ describe('Companies tests',  function () {
         expect(newCompanyInfo[0].companyName).to.be.equal('ExpensiveSkates');
     });
 
-    // it('Delete company(id)', async function () {
-    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
-    //     expect(companyInfo[0].companyId).to.be.equal(1);
-    // });
+    it('Delete company(id)', async function () {
+        let deleted = await companiesService.deleteCompanyById(1);
+        let companies = await companiesService.getAll();
+        expect(deleted).to.be.equal('Company deleted successfully');
+    });
+
+    it('** Extra test ** Adding company', async function () {
+        let companyToAdd = { 
+                "companyId": 099,
+                "companyName": "TestBestTrader",
+                "companyAddress": "Abbey road",
+        }
+        let companyAdded = await companiesService.insertCompany(companyToAdd);
+        expect(companyAdded[0].companyId).to.be.equal(99);
+        expect(companyAdded[0].companyAddress).to.be.equal('Abbey road');
+    });
     
     // it('Delete company(name)', async function () {
     //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
     //     expect(companyInfo[0].companyId).to.be.equal(1);
     // });
 
-    // it('Get all order bought by one company(id)', async function () {
-    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
-    //     expect(companyInfo[0].companyId).to.be.equal(1);
-    // });
+    it('Get all order bought by one company(id)', async function () {
+        let orders = await companiesService.getAllOrdersFromCompany(2);
+        expect(orders[1].orderedItem).to.be.equal('Playstation 4');
+    });
 
-    // it('Get the amount of money paid by a company(id)', async function () {
-    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
-    //     expect(companyInfo[0].companyId).to.be.equal(1);
-    // });
+    it('Get the amount of money paid by a company(id)', async function () {
+        let companyInfo = await companiesService.getAmountOfMoneyByCompany(2);
+        expect(companyInfo).to.be.equal(290);
+    });
 
-    // it('Get all companies that bought a certain orderItem', async function () {
-    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
-    //     expect(companyInfo[0].companyId).to.be.equal(1);
-    // });
+    it('Get all companies that bought a certain orderItem', async function () {
+        let companyInfo = await companiesService.getCompanyByName('Cheapskates');
+        expect(companyInfo[0].companyId).to.be.equal(1);
+    });
     
 });
 

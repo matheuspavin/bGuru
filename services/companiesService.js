@@ -4,7 +4,9 @@ const ordersService = require('./ordersService');
 
 const getAll = async function () {
     await integrateWithOrders();
-    const sql = `SELECT * FROM companies`;
+    const sql = `SELECT * FROM companies
+                 WHERE 
+                    active = 1`;
     return databaseService.query(sql, []);
 };
 
@@ -20,12 +22,14 @@ const getCompanyByName = async function (companyName) {
 const getCompanyById = async function (companyId) {
     await integrateWithOrders();
     const sql = `SELECT * FROM companies
-                 WHERE company_id = ?`;
+                 WHERE active = 1
+                 AND company_id = ?`;
     const params = [companyId];
     return databaseService.query(sql, params);
 };
 
 const insertCompany = async function (company) {
+    if (await getCompanyByName(company.companyName).length > 0) throw new exception('Name of company already exists');
     const sql = `INSERT INTO companies 
                         (company_id, company_name, company_address, company_register, company_country)
                     VALUES
@@ -50,7 +54,7 @@ const updateCompany = async function (company) {
                         company_address = ?,
                         company_register = ?,
                         company_country = ?
-                WHERE company_id = ?`;
+                    WHERE company_id = ?`;
     const params = [
         company.companyName,
         company.companyAddress,
@@ -60,29 +64,61 @@ const updateCompany = async function (company) {
     ]
     await databaseService.query(sql, params);
     let ordersCompanies = await ordersService.getAll();
-    ordersCompanies.forEach(async order => {
+    await ordersCompanies.forEach(async order => {
         if (oldCompany[0].companyName.toUpperCase() === order.companyName.toUpperCase()) {
             await ordersService.updateOrderCompany(order.orderId, company.companyName);
         };
     });
 
     return getCompanyById(company.companyId);
+};
+
+const deleteCompanyById = async function (companyId) {
+    let company = await getCompanyById(companyId);
+    company = company[0];
+    company.active = 0;
+    await updateCompany(company);
+    return 'Company deleted successfully'
+};
+
+const getAllOrdersFromCompany = async function (companyId) {
+    let company = await getCompanyById(companyId);
+    company = company[0];
+    let orders = await ordersService.getAll();
+
+    orders = orders.filter(order => {
+        return order.companyName.toUpperCase() === company.companyName.toUpperCase();
+    })
+    return orders;
+};
+
+const getAmountOfMoneyByCompany = async function (companyId) {
+    let company = await getCompanyById(companyId);
+    company = company[0];
+    let orders = await ordersService.getAll();
+
+    orders = orders.filter(order => {
+        return order.companyName.toUpperCase() === company.companyName.toUpperCase();
+    })
+
+    let amount = orders.reduce((a,b) => {return (Number(a.price) + Number(b.price))});
+    return amount;
 }
 
 const integrateWithOrders = async function () {
     let ordersCompanies = await ordersService.getCompanies();
-    let companies = await databaseService.query(`SELECT * FROM companies`, []);
+    let companies = await databaseService.query(`SELECT * FROM companies WHERE active = 1`, []);
     if (companies.length > 0) {
         for (let company of companies)
             ordersCompanies = ordersCompanies.filter( (saved) => {
                 return saved.companyName.toUpperCase() !== company.companyName.toUpperCase();
         });
     }
-    ordersCompanies.forEach(order => {
+    ordersCompanies.forEach(async order => {
        let company = {
             companyName : order.companyName
         }
-        insertCompany(company);
+        await insertCompany(company);
     });
 };
 
@@ -92,5 +128,8 @@ module.exports = {
     getCompanyById,
     getCompanyByName,
     insertCompany,
-    updateCompany
+    updateCompany,
+    deleteCompanyById,
+    getAllOrdersFromCompany,
+    getAmountOfMoneyByCompany
 }

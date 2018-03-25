@@ -9,7 +9,8 @@ db.serialize( () => {
             company_name text NOT NULL, 
             company_address text, 
             company_register text,
-            company_country text)`);
+            company_country text,
+            active integer DEFAULT 1)`);
 });
 
 db.serialize( () => {
