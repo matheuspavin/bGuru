@@ -1,8 +1,9 @@
 'use strict';
 const db = require('sqlite');
+const config = require('../config/config');
 
-db.open('.//database/borderGuru.sqlite', { Promise }).then(function () {
-    console.log('connected to sqlite');
+db.open(config.database, { Promise }).then(function () {
+    console.log('connected to sqlite' + ' on database '+ config.database);
 }).catch(function (error) {
     console.error(error);
 });
@@ -20,7 +21,7 @@ const query = function (sql, params) {
 };
 
 module.exports = {
-    execute: execute,
-    get: get,
-    query: query
+    execute,
+    get,
+    query
 };

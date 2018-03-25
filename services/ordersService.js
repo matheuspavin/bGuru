@@ -17,7 +17,7 @@ const insertOrder = async function (order) {
     //TODO Refactor this return, because it can be done on the insert sql
         await databaseService.query(sql, params);
         const insertedId = await databaseService.query(`SELECT last_insert_rowid()as lastId`, []);
-        return getOrderById(insertedId[0].lastId);
+        return await getOrderById(insertedId[0].lastId);
 };
 
 const getAll = async function () {
