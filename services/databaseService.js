@@ -8,20 +8,57 @@ db.open(config.database, { Promise }).then(function () {
     console.error(error);
 });
 
-const execute = function (sql, params) {
-    return db.run(sql, params);
+const execute = async function (sql, params) {
+    let raw = await db.run(sql, params);
+    let response = [];
+    if (raw.length > 0) {
+        raw.forEach(element => {
+            response.push(convertObjectToCamelCase(element));
+        });
+    }
+    return response;
 };
 
-const get = function (sql, params) {
-    return db.get(sql, params);
+const query = async function (sql, params) {
+    let raw = await db.all(sql, params);
+    let response = [];
+    if (raw.length > 0) {
+        raw.forEach(element => {
+            response.push(convertObjectToCamelCase(element));
+        });
+    }
+    return response;
 };
 
-const query = function (sql, params) {
-    return db.all(sql, params);
+const convertObjectToCamelCase = function (obj) {
+    const keysToBeModified = [];
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (key.indexOf("_") > -1) keysToBeModified.push(key);
+        }
+    }
+    keysToBeModified.forEach(function (key) {
+        obj[toCamelCase(key)] = obj[key];
+        delete obj[key];
+    });
+
+    for (let key in obj){
+        if (obj.hasOwnProperty(key) && typeof obj[key] === 'object' && obj[key] && Object.keys(obj[key]).length > 0) {
+            obj[key] = convertObjectToCamelCase(obj[key]);
+        }
+    }
+    return obj;
+};
+
+const toCamelCase = function (text) {
+    if (!text) return text;
+    return text.split("_").map(function (word, index) {
+        if (index === 0) return word.toLowerCase();
+        return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
+    }).join("");
 };
 
 module.exports = {
     execute,
-    get,
     query
 };

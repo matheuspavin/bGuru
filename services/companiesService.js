@@ -12,7 +12,7 @@ const getCompanyByName = async function (companyName) {
     await integrateWithOrders();
     let companies = await getAll();
     companies = companies.filter( (company) => {
-        return company.company_name.toUpperCase() === companyName.toUpperCase();
+        return company.companyName.toUpperCase() === companyName.toUpperCase();
     })
     return companies;
 };
@@ -43,18 +43,44 @@ const insertCompany = async function (company) {
         return await getCompanyById(insertedId[0].lastId);
 };
 
+const updateCompany = async function (company) {
+    const oldCompany = await getCompanyById(company.companyId);
+    const sql = `UPDATE companies 
+                    SET company_name = ?,
+                        company_address = ?,
+                        company_register = ?,
+                        company_country = ?
+                WHERE company_id = ?`;
+    const params = [
+        company.companyName,
+        company.companyAddress,
+        company.companyRegister,
+        company.companyCountry,
+        company.companyId
+    ]
+    await databaseService.query(sql, params);
+    let ordersCompanies = await ordersService.getAll();
+    ordersCompanies.forEach(async order => {
+        if (oldCompany[0].companyName.toUpperCase() === order.companyName.toUpperCase()) {
+            await ordersService.updateOrderCompany(order.orderId, company.companyName);
+        };
+    });
+
+    return getCompanyById(company.companyId);
+}
+
 const integrateWithOrders = async function () {
     let ordersCompanies = await ordersService.getCompanies();
     let companies = await databaseService.query(`SELECT * FROM companies`, []);
     if (companies.length > 0) {
         for (let company of companies)
             ordersCompanies = ordersCompanies.filter( (saved) => {
-                return saved.company_name.toUpperCase() !== company.company_name.toUpperCase();
+                return saved.companyName.toUpperCase() !== company.companyName.toUpperCase();
         });
     }
     ordersCompanies.forEach(order => {
        let company = {
-            companyName : order.company_name
+            companyName : order.companyName
         }
         insertCompany(company);
     });
@@ -65,5 +91,6 @@ module.exports = {
     getAll,
     getCompanyById,
     getCompanyByName,
-    insertCompany
+    insertCompany,
+    updateCompany
 }

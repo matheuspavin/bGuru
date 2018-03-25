@@ -1,22 +1,33 @@
-const ordersService = require('../services/ordersService');
-const testOrders = require('../utils/orders');
 const expect = require('chai').expect
 const databaseService = require('../services/databaseService');
+const ordersService = require('../services/ordersService');
+const companiesService = require('../services/companiesService');
+const testOrders = require('../utils/orders');
 
 before(async function () {
 
-    var create = `CREATE TABLE IF NOT EXISTS orders 
+    let createOrders = `CREATE TABLE IF NOT EXISTS orders 
             (order_id integer PRIMARY KEY,
             company_name text NOT NULL, 
             customer_address text NOT NULL, 
             ordered_item text NOT NULL, 
             price integer NOT NULL, 
             currency integer NOT NULL)`;
-    await databaseService.execute(create, []);
+    await databaseService.execute(createOrders, []);
+
+    let creatCompanies = `CREATE TABLE IF NOT EXISTS companies 
+            (company_id integer PRIMARY KEY,
+            company_name text NOT NULL, 
+            company_address text, 
+            company_register text,
+            company_country text)`;
+    await databaseService.execute(creatCompanies, []);
     
     await testOrders.orders.forEach(async order =>  {
         await ordersService.insertOrder(order);
     });
+
+    await companiesService.getAll();
 });
 
 describe('Orders tests',  function () {
@@ -31,20 +42,20 @@ describe('Orders tests',  function () {
                 "currency": "EUR"
         }
         let orderAdded = await ordersService.insertOrder(orderToAdd);
-        expect(orderAdded[0].order_id).to.be.equal(99);
-        expect(orderAdded[0].customer_address).to.be.equal('Abbey road');
+        expect(orderAdded[0].orderId).to.be.equal(99);
+        expect(orderAdded[0].customerAddress).to.be.equal('Abbey road');
     });
     it('Show all orders from a particular company', async function () {
         let ordersFromCompany = await ordersService.getOrdersByCompany('MegaCorp');
         expect(ordersFromCompany.length).to.be.equal(2);
-        expect(ordersFromCompany[0].order_id).to.be.equal(3);
-        expect(ordersFromCompany[0].customer_address).to.be.equal('Steindamm 80');
+        expect(ordersFromCompany[0].orderId).to.be.equal(3);
+        expect(ordersFromCompany[0].customerAddress).to.be.equal('Steindamm 80');
     });
     it('Show all orders to a particular address', async function () {
         let ordersFromAddress = await ordersService.getOrdersByAddress('Reeperbahn 153');
         expect(ordersFromAddress.length).to.be.equal(3);
-        expect(ordersFromAddress[0].order_id).to.be.equal(2);
-        expect(ordersFromAddress[0].company_name).to.be.equal('Cheapskates');
+        expect(ordersFromAddress[0].orderId).to.be.equal(2);
+        expect(ordersFromAddress[0].companyName).to.be.equal('Cheapskates');
     });
     it('Delete a particular order given an OrderId', async function () {
         let deleteOrder = await ordersService.deleteOrderById(99);
@@ -52,18 +63,68 @@ describe('Orders tests',  function () {
     });
     it('Display how often each item has been ordered, in descending order', async function () {
         let orderedItens = await ordersService.getOrderedItens();
-        expect(orderedItens[1].ordered_item).to.be.equal('Macbook');
+        expect(orderedItens[1].orderedItem).to.be.equal('Macbook');
         expect(orderedItens[1].quantity).to.be.equal(2);
     });
     it('** Extra test ** Get all companies', async function () {
         let companies = await ordersService.getCompanies();
         expect(companies.length).to.be.equal(3);
-        expect(companies[0].company_name).to.be.equal('Cheapskates');
+        expect(companies[0].companyName).to.be.equal('Cheapskates');
     });
 
 });
 
+describe('Companies tests',  function () {
+    
+    it('Get company info (id)', async function () {
+        let companyInfo = await companiesService.getCompanyById(1);
+        expect(companyInfo[0].companyName).to.be.equal('Cheapskates');
+    });
+
+    it('Get company info (name)', async function () {
+        let companyInfo = await companiesService.getCompanyByName('Cheapskates');
+        expect(companyInfo[0].companyId).to.be.equal(1);
+    });
+
+    it('Update company info', async function () {
+        let companyInfo = await companiesService.getCompanyById(1);
+        companyInfo[0].companyName = 'ExpensiveSkates';
+        let newCompanyInfo = await companiesService.updateCompany(companyInfo[0]);
+        expect(newCompanyInfo[0].companyId).to.be.equal(1);
+        expect(newCompanyInfo[0].companyName).to.be.equal('ExpensiveSkates');
+    });
+
+    // it('Delete company(id)', async function () {
+    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
+    //     expect(companyInfo[0].companyId).to.be.equal(1);
+    // });
+    
+    // it('Delete company(name)', async function () {
+    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
+    //     expect(companyInfo[0].companyId).to.be.equal(1);
+    // });
+
+    // it('Get all order bought by one company(id)', async function () {
+    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
+    //     expect(companyInfo[0].companyId).to.be.equal(1);
+    // });
+
+    // it('Get the amount of money paid by a company(id)', async function () {
+    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
+    //     expect(companyInfo[0].companyId).to.be.equal(1);
+    // });
+
+    // it('Get all companies that bought a certain orderItem', async function () {
+    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
+    //     expect(companyInfo[0].companyId).to.be.equal(1);
+    // });
+    
+});
+
 after(async function () {
-    const del = 'DROP TABLE IF EXISTS orders';
-    await databaseService.execute(del, []);
+    const delOrders = 'DROP TABLE IF EXISTS orders';
+    await databaseService.execute(delOrders, []);
+
+    const delCompanies = 'DROP TABLE IF EXISTS companies';
+    await databaseService.execute(delCompanies, []);
 });

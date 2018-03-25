@@ -12,4 +12,24 @@ router.get('/', async function (req, res, next) {
     }
 });
 
+router.post('/', async function(req, res, next){
+    var company = req.body;
+    try {
+        let result = await companiesService.insertCompany(company);
+        res.send(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.put('/', async function(req, res, next){
+    var company = req.body;
+    try {
+        let result = await companiesService.updateCompany(company);
+        res.send(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = router;

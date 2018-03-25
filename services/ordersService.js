@@ -44,7 +44,7 @@ const deleteOrderById = function (orderId) {
 const getOrdersByCompany = async function (companyName) {
     let orders = await getAll();
     orders = orders.filter( (order) => {
-        return order.company_name.toUpperCase() === companyName.toUpperCase();
+        return order.companyName.toUpperCase() === companyName.toUpperCase();
     })
     return orders;
 };
@@ -52,7 +52,7 @@ const getOrdersByCompany = async function (companyName) {
 const getOrdersByAddress = async function (customerAddress) {
     let orders = await getAll();
     orders = orders.filter( (order) => {
-        return (order.customer_address).toUpperCase() === customerAddress.toUpperCase();
+        return (order.customerAddress).toUpperCase() === customerAddress.toUpperCase();
     })
     return orders;
 };
@@ -70,6 +70,13 @@ const getCompanies = async function () {
     return databaseService.query(sql, []);
 };
 
+const updateOrderCompany = async function (orderId, companyName) {
+    const sql = `UPDATE orders 
+                 SET company_name = ?
+                 WHERE order_id = ?`;
+    return databaseService.query(sql, [companyName, orderId]);
+}
+
 module.exports = {
     insertOrder,
     getAll,
@@ -78,5 +85,6 @@ module.exports = {
     getOrdersByCompany,
     getOrdersByAddress,
     getOrderedItens,
-    getCompanies
+    getCompanies,
+    updateOrderCompany
 }
