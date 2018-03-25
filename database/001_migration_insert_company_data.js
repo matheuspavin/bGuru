@@ -4,11 +4,12 @@ var sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('./database/borderGuru.sqlite');
 	
 db.serialize( () => {
-  db.run(`CREATE TABLE IF NOT EXISTS company 
+  db.run(`CREATE TABLE IF NOT EXISTS companies 
             (company_id integer PRIMARY KEY,
             company_name text NOT NULL, 
-            company_address text NOT NULL, 
-            company_register text NOT NULL)`);
+            company_address text, 
+            company_register text,
+            company_country text)`);
 });
 
 db.serialize( () => {

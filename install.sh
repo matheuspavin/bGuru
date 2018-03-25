@@ -1,3 +1,3 @@
 npm install
-node ./database/insertScript.js 
+node ./database/createScript.js 
 ./generate-run.sh

@@ -5,6 +5,7 @@ var express = require('express'),
 const bodyParser = require('body-parser');
 
 const ordersRoute = require('./routes/ordersRoute');
+const companiesRoute = require('./routes/companiesRoute');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -19,6 +20,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.use('/orders', ordersRoute);
+app.use('/companies', companiesRoute);
 
 const errorHandler = function (err, req, res, next) {
 	console.error('Error:', err);

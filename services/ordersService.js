@@ -64,6 +64,12 @@ const getOrderedItens = async function () {
     return databaseService.query(sql, []);
 };
 
+const getCompanies = async function () {
+    const sql = `SELECT company_name from orders
+                 GROUP BY company_name`;
+    return databaseService.query(sql, []);
+};
+
 module.exports = {
     insertOrder,
     getAll,
@@ -71,5 +77,6 @@ module.exports = {
     deleteOrderById,
     getOrdersByCompany,
     getOrdersByAddress,
-    getOrderedItens
+    getOrderedItens,
+    getCompanies
 }

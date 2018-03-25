@@ -55,6 +55,12 @@ describe('Orders tests',  function () {
         expect(orderedItens[1].ordered_item).to.be.equal('Macbook');
         expect(orderedItens[1].quantity).to.be.equal(2);
     });
+    it('** Extra test ** Get all companies', async function () {
+        let companies = await ordersService.getCompanies();
+        expect(companies.length).to.be.equal(3);
+        expect(companies[0].company_name).to.be.equal('Cheapskates');
+    });
+
 });
 
 after(async function () {
