@@ -103,7 +103,11 @@ const getAmountOfMoneyByCompany = async function (companyId) {
 
     let amount = orders.reduce((a,b) => {return (Number(a.price) + Number(b.price))});
     return amount;
-}
+};
+
+const getOrdersByItem = async function (orderedItem) {
+    return await ordersService.getOrdersByItem(orderedItem);
+};
 
 const integrateWithOrders = async function () {
     let ordersCompanies = await ordersService.getCompanies();
@@ -131,5 +135,6 @@ module.exports = {
     updateCompany,
     deleteCompanyById,
     getAllOrdersFromCompany,
-    getAmountOfMoneyByCompany
+    getAmountOfMoneyByCompany,
+    getOrdersByItem
 }

@@ -128,8 +128,8 @@ describe('Companies tests',  function () {
     });
 
     it('Get all companies that bought a certain orderItem', async function () {
-        let companyInfo = await companiesService.getCompanyByName('Cheapskates');
-        expect(companyInfo[0].companyId).to.be.equal(1);
+        let orders = await companiesService.getOrdersByItem('Macbook');
+        expect(orders[1].companyName).to.be.equal('SuperTrader');
     });
     
 });

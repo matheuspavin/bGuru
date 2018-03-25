@@ -70,12 +70,19 @@ const getCompanies = async function () {
     return databaseService.query(sql, []);
 };
 
-const updateOrderCompany = async function (orderId, companyName) {
+const updateOrderCompany = function (orderId, companyName) {
     const sql = `UPDATE orders 
                  SET company_name = ?
                  WHERE order_id = ?`;
     return databaseService.query(sql, [companyName, orderId]);
-}
+};
+
+const getOrdersByItem = function (orderedItem) {
+    const sql = `SELECT company_name from orders
+                    WHERE ordered_item = ?
+                    GROUP BY company_name`;
+    return databaseService.query(sql, [orderedItem]);
+};
 
 module.exports = {
     insertOrder,
@@ -86,5 +93,6 @@ module.exports = {
     getOrdersByAddress,
     getOrderedItens,
     getCompanies,
-    updateOrderCompany
+    updateOrderCompany,
+    getOrdersByItem
 }
