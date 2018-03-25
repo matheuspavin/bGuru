@@ -90,7 +90,7 @@ describe('Companies tests',  function () {
     it('Update company info', async function () {
         let companyInfo = await companiesService.getCompanyById(1);
         companyInfo[0].companyName = 'ExpensiveSkates';
-        let newCompanyInfo = await companiesService.updateCompany(companyInfo[0]);
+        let newCompanyInfo = await companiesService.updateCompany(1, companyInfo[0]);
         expect(newCompanyInfo[0].companyId).to.be.equal(1);
         expect(newCompanyInfo[0].companyName).to.be.equal('ExpensiveSkates');
     });

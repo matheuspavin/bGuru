@@ -12,6 +12,26 @@ router.get('/', async function (req, res, next) {
     }
 });
 
+router.get('/company/name/:companyName', async function(req, res, next){
+    var companyName = req.params.companyName;
+    try {
+        let result = await companiesService.getCompanyByName(companyName);
+        return res.json(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('/company/id/:idCompany', async function(req, res, next){
+    var idCompany = req.params.idCompany;
+    try {
+        let result = await companiesService.getCompanyById(idCompany);
+        return res.json(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.post('/', async function(req, res, next){
     var company = req.body;
     try {
@@ -22,14 +42,26 @@ router.post('/', async function(req, res, next){
     }
 });
 
-router.put('/', async function(req, res, next){
+router.put('/:companyId', async function(req, res, next){
+    var companyId = req.params.companyId;
     var company = req.body;
     try {
-        let result = await companiesService.updateCompany(company);
+        let result = await companiesService.updateCompany(companyId, company);
         res.send(result);
     } catch (error) {
         next(error);
     }
+});
+
+router.delete('/:companyId', async function(req, res, next){
+    var companyId = req.params.companyId;
+    try {
+        let result = await companiesService.deleteCompanyById(companyId);
+        res.send(result);    
+    } catch (error) {
+        next(error);
+    }
+    
 });
 
 module.exports = router;

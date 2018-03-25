@@ -47,8 +47,8 @@ const insertCompany = async function (company) {
         return await getCompanyById(insertedId[0].lastId);
 };
 
-const updateCompany = async function (company) {
-    const oldCompany = await getCompanyById(company.companyId);
+const updateCompany = async function (companyId, company) {
+    const oldCompany = await getCompanyById(companyId);
     const sql = `UPDATE companies 
                     SET company_name = ?,
                         company_address = ?,
@@ -60,7 +60,7 @@ const updateCompany = async function (company) {
         company.companyAddress,
         company.companyRegister,
         company.companyCountry,
-        company.companyId
+        companyId
     ]
     await databaseService.query(sql, params);
     let ordersCompanies = await ordersService.getAll();
@@ -77,7 +77,7 @@ const deleteCompanyById = async function (companyId) {
     let company = await getCompanyById(companyId);
     company = company[0];
     company.active = 0;
-    await updateCompany(company);
+    await updateCompany(companyId, company);
     return 'Company deleted successfully'
 };
 
