@@ -32,6 +32,27 @@ router.get('/company/id/:idCompany', async function(req, res, next){
     }
 });
 
+router.get('/amount/:idCompany', async function(req, res, next){
+    var idCompany = req.params.idCompany;
+    try {
+        let result = await companiesService.getAmountOfMoneyByCompany(idCompany);
+        return res.json(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.post('/orderedItem', async function(req, res, next){
+    var body = req.body;
+    try {
+        let result = await companiesService.getOrdersByItem(body.orderedItem);
+        return res.json(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 router.post('/', async function(req, res, next){
     var company = req.body;
     try {

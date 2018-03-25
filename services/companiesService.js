@@ -49,17 +49,20 @@ const insertCompany = async function (company) {
 
 const updateCompany = async function (companyId, company) {
     const oldCompany = await getCompanyById(companyId);
+    !company.active || company.active === 1 ? company.active = 1 : company.active = 0;
     const sql = `UPDATE companies 
                     SET company_name = ?,
                         company_address = ?,
                         company_register = ?,
-                        company_country = ?
+                        company_country = ?,
+                        active = ?
                     WHERE company_id = ?`;
     const params = [
         company.companyName,
         company.companyAddress,
         company.companyRegister,
         company.companyCountry,
+        company.active,
         companyId
     ]
     await databaseService.query(sql, params);
