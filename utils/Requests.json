@@ -1,0 +1,355 @@
+{
+	"id": "cb34272a-8a57-4994-adb7-b973b7c2a483",
+	"name": "borderGuru",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"78700de1-b6ab-4059-a5cb-f71d2ddd8c36",
+		"b9bcbf65-aa91-40cf-822f-2a140d4ad274",
+		"abdee7ff-579b-4ffe-b642-36e448ce3eae",
+		"15f7b698-9d2f-449a-b3c4-61d7fadf8e30",
+		"c21b9b35-8c30-46c7-961a-2302f382e647",
+		"57f4158c-86ca-4a27-9b41-fef2599812ac",
+		"a7bcf12f-1401-4e02-b53a-84d59c2f6b4e",
+		"59ba4aef-8e91-497e-b844-c5b22fc56eb3",
+		"4e065431-f83d-4613-8cf8-49cd78702dec",
+		"9e0327e0-06e9-4c83-8e47-e1f1d9c57ccd",
+		"ed75a143-b83b-4314-bdf3-0a2bf6372c79",
+		"11be2bbf-7421-4b47-be40-e01deec80cc1",
+		"39824e9a-6037-484d-8b0d-307a6ecf3c57",
+		"9b6bb24a-f606-42b8-9366-b2bc76abe84e"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "11be2bbf-7421-4b47-be40-e01deec80cc1",
+			"name": "Delete Company",
+			"url": "http://localhost:3500/companies/99",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "15f7b698-9d2f-449a-b3c4-61d7fadf8e30",
+			"name": "Get one order, by id",
+			"url": "http://localhost:3500/orders/17",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "39824e9a-6037-484d-8b0d-307a6ecf3c57",
+			"name": "Get amount of money bought by company id",
+			"url": "http://localhost:3500/companies/amount/2",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "4e065431-f83d-4613-8cf8-49cd78702dec",
+			"name": "Get company info by name",
+			"url": "http://localhost:3500/companies/company/name/supertrader",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "57f4158c-86ca-4a27-9b41-fef2599812ac",
+			"name": "Get orders by address",
+			"url": "http://localhost:3500/orders/address",
+			"description": "",
+			"data": [
+				{
+					"key": "customerAdress",
+					"value": "Reeperbahn 153",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "59ba4aef-8e91-497e-b844-c5b22fc56eb3",
+			"name": "Get all companies",
+			"url": "http://localhost:3500/companies",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "78700de1-b6ab-4059-a5cb-f71d2ddd8c36",
+			"name": "Get all orders",
+			"url": "http://localhost:3500/orders",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "9b6bb24a-f606-42b8-9366-b2bc76abe84e",
+			"name": "Get all companies that bought a certain orderItem",
+			"url": "http://localhost:3500/companies/orderedItem",
+			"description": "",
+			"data": [
+				{
+					"key": "orderedItem",
+					"value": "Macbook",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": ""
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "9e0327e0-06e9-4c83-8e47-e1f1d9c57ccd",
+			"name": "Get company info by id",
+			"url": "http://localhost:3500/companies/company/id/3",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "a7bcf12f-1401-4e02-b53a-84d59c2f6b4e",
+			"name": "Get itens ordered",
+			"url": "http://localhost:3500/orders/itens/orderedItens",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "abdee7ff-579b-4ffe-b642-36e448ce3eae",
+			"name": "Delete a order",
+			"url": "http://localhost:3500/orders/99",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "b9bcbf65-aa91-40cf-822f-2a140d4ad274",
+			"name": "Post a order",
+			"url": "http://localhost:3500/orders",
+			"description": "",
+			"data": [
+				{
+					"key": "orderId",
+					"value": "002",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "companyName",
+					"value": "BestTrader",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "customerAdress",
+					"value": "Reeperbahn 153",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "orderedItem",
+					"value": "macbook",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "price",
+					"value": "1700",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "currency",
+					"value": "EUR",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": ""
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "c21b9b35-8c30-46c7-961a-2302f382e647",
+			"name": "Get orders by company",
+			"url": "http://localhost:3500/orders/company/supertrader",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "ed75a143-b83b-4314-bdf3-0a2bf6372c79",
+			"name": "Update company info",
+			"url": "http://localhost:3500/companies/99",
+			"description": "",
+			"data": [
+				{
+					"key": "companyName",
+					"value": "LeTest",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		}
+	]
+}
