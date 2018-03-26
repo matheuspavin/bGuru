@@ -52,7 +52,6 @@ router.post('/orderedItem', async function(req, res, next){
     }
 });
 
-
 router.post('/', async function(req, res, next){
     var company = req.body;
     try {
