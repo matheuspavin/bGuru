@@ -111,11 +111,6 @@ describe('Companies tests',  function () {
         expect(companyAdded[0].companyId).to.be.equal(99);
         expect(companyAdded[0].companyAddress).to.be.equal('Abbey road');
     });
-    
-    // it('Delete company(name)', async function () {
-    //     let companyInfo = await companiesService.getCompanyByName('Cheapskates');
-    //     expect(companyInfo[0].companyId).to.be.equal(1);
-    // });
 
     it('Get all order bought by one company(id)', async function () {
         let orders = await companiesService.getAllOrdersFromCompany(2);

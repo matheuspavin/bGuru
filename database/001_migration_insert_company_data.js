@@ -2,6 +2,7 @@
 var sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./database/borderGuru.sqlite');
+console.log("Running the migration");
 	
 db.serialize( () => {
   db.run(`CREATE TABLE IF NOT EXISTS companies 

@@ -7,6 +7,10 @@
 **This project is intended to run on unix systems**
 
 1. In the main folder run the install.sh script.
+1. Run the file in the folder database, called createScript.js 
+(node ./database/createScript.js)
+1. Run the file in the folder database, called 001_migration_insert_company_data.js 
+(node ./database/001_migration_insert_company_data.js)
 1. Run the newly created run.sh file.
 
 #IMPORTANT
