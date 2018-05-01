@@ -1,7 +1,7 @@
 'use strict';
 var sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('./database/borderGuru.sqlite');
+let db = new sqlite3.Database('borderGuru.sqlite');
 console.log("Running the creation script");
 	
 db.serialize( () => {
