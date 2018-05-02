@@ -1,0 +1,52 @@
+<link rel="stylesheet" type="text/css" href="template/updateOrderModal.css">
+<div class="modal-header">
+        <div class="text-center">
+            <label class="modal-header-typography" ng-show="!new">Update Order</label>
+            <label class="modal-header-typography"ng-show="new">New Order</label>
+        </div>
+        
+    </div>
+    
+    <div class="modal-body">
+        <form name="orderForm">
+            <div class="input-container">
+                <div class="form-group">
+                    <label class="text-capitalize-first required">Company Name</label>
+                    <input class="form-control" type="text" ng-model="order.companyName" required/>
+                </div>
+                <div class="form-group">
+                    <label class="text-capitalize-first">Customer Address</label>
+                    <input class="form-control" ng-model="order.customerAddress" required></select>
+                </div>
+                <div class="form-group">
+                    <label class="text-capitalize-first">Ordered Item</label>
+                    <input class="form-control" type="text" ng-model="order.orderedItem" required></select>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="text-capitalize-first">Price</label>
+                    <input class="form-control" type="currency" ng-model="order.price" required></select>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="text-capitalize-first">Currency</label>
+                    <input class="form-control" type="text" ng-model="order.currency" required></select>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <footer> 
+            <div class="options-buttons">    
+                <div>   
+                    <button class="btn primary-button" ng-click="update(order)"
+                            ng-disabled="orderForm.$invalid" >Update Order
+                    </button>
+                </div>
+                <div>
+                        <button class="close" ng-click="close()"><i class="fa fa-times-circle"></i>
+                            <label class="label">close</label>    
+                        </button>
+                </div>
+            </div>
+        </footer>
+    </div>

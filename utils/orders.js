@@ -3,7 +3,7 @@ module.exports = {
         {
             "orderId" : 001, 
             "companyName": "SuperTrader",
-            "customerAdress": "Steindamm 80",
+            "customerAddress": "Steindamm 80",
             "orderedItem":  "Macbook",
             "price":  1700,
             "currency": "EUR"
@@ -11,7 +11,7 @@ module.exports = {
         {
             "orderId" : 002, 
             "companyName": "Cheapskates",
-            "customerAdress": "Reeperbahn 153",
+            "customerAddress": "Reeperbahn 153",
             "orderedItem":  "Macbook",
             "price":  1700,
             "currency": "EUR"
@@ -19,7 +19,7 @@ module.exports = {
         {
             "orderId" : 003, 
             "companyName": "MegaCorp",
-            "customerAdress": "Steindamm 80",
+            "customerAddress": "Steindamm 80",
             "orderedItem":  "Book \"Guide to Hamburg\"",
             "price":  20,
             "currency": "EUR"
@@ -27,7 +27,7 @@ module.exports = {
         {
             "orderId" : 004, 
             "companyName": "SuperTrader",
-            "customerAdress": "Sternstrasse 125",
+            "customerAddress": "Sternstrasse 125",
             "orderedItem":  "Book \"Cooking 101\"",
             "price":  10,
             "currency": "EUR"
@@ -35,7 +35,7 @@ module.exports = {
         {
             "orderId" : 005, 
             "companyName": "SuperTrader",
-            "customerAdress": "Ottenser Hauptstrasse 24",
+            "customerAddress": "Ottenser Hauptstrasse 24",
             "orderedItem":  "Inline Skates",
             "price":  75,
             "currency": "EUR"
@@ -43,7 +43,7 @@ module.exports = {
         {
             "orderId" : 006, 
             "companyName": "MegaCorp",
-            "customerAdress": "Reeperbahn 153",
+            "customerAddress": "Reeperbahn 153",
             "orderedItem":  "Playstation 4",
             "price":  270,
             "currency": "EUR"
@@ -51,7 +51,7 @@ module.exports = {
         {
             "orderId" : 007, 
             "companyName": "Cheapskates",
-            "customerAdress": "Lagerstrasse 11",
+            "customerAddress": "Lagerstrasse 11",
             "orderedItem":  "Flux compensator",
             "price":  2000,
             "currency": "USD"
@@ -59,7 +59,7 @@ module.exports = {
         {
             "orderId" : 008, 
             "companyName": "SuperTrader",
-            "customerAdress": "Reeperbahn 153",
+            "customerAddress": "Reeperbahn 153",
             "orderedItem":  "Inline Skates",
             "price":  75,
             "currency": "EUR"

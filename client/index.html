@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+
+    <!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Clients</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" type="text/css" href="template/updateOrderModal.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" href="bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="bower_components/angular-veasy-table/dist/css/veasy-table.min.css" media="screen" charset="utf-8"/>
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:50px; }
+		#clients-list			{ margin-bottom:30px; }
+		#clients-form 	    	{ margin-bottom:50px; }
+	</style>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/appController.js"></script>
+    <script src="js/appService.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js" charset="utf-8"></script>
+    <script src="bower_components/popper.js/dist/umd/popper.js" ></script>
+
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
+    <script src="bower_components/angular-veasy-table/dist/js/veasy-table-tpls.min.js" charset="utf-8"></script>
+    <script src="bower_components/angular-veasy-table/dist/js/veasy-table.js" charset="utf-8"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script> -->
+
+</head>
+<body ng-controller="appController">
+    <div class="container">
+
+            <div class="jumbotron text-center">
+                <h1>We have <span class="label label-info">{{ orders.length }}</span> Orders
+                
+            </h1>
+            </div>
+
+            <div class="jumbotron text-center">
+                <button class="btn btn-primary fa fa-plus" ng-click="newOrder()"></button>
+                <button class="btn btn-primary" ng-click="((showOrders = true) && (showCompanies = false))">Show Orders</button>
+                <button class="btn btn-primary" ng-click="((showCompanies = true) && (showOrders = false))">Show Companies</button>
+            </div>
+            <div ng-show="showOrders">
+                <veasy-table list="orders" config="configTableOrders"></veasy-table>
+            </div>
+            <div ng-show="showCompanies">
+                    <veasy-table list="companies" config="configTableCompanies"></veasy-table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

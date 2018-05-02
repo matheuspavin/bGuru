@@ -12,6 +12,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use('/client', express.static('client/'));
+
 app.all('*', function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
@@ -21,6 +23,10 @@ app.all('*', function(req, res, next) {
 
 app.use('/orders', ordersRoute);
 app.use('/companies', companiesRoute);
+app.get("/", function (req, res) {
+	res.redirect("client");
+});
+
 
 const errorHandler = function (err, req, res, next) {
 	console.error('Error:', err);

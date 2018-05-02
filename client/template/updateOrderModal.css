@@ -1,0 +1,60 @@
+.modal-header-typography {
+    font-size: 25px;
+}
+
+.options-buttons {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.label {
+    font-size: 20px;
+    font-weight:bold;
+    color: #AEB0BF;
+    text-align: center;
+
+}
+
+.close {
+    display: flex;
+    height: 40px;
+    font-size: 30px;
+    color: #990000;
+}
+
+.close:hover {
+    color: #990000;
+}
+
+.primary-button {
+    background-color: #00DAB8;
+    color: #ffffff;
+    border-radius: 50px;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 35px;
+    font-weight:bold;
+    display: flex;
+    justify-content: center;
+
+    -webkit-transition: all 0.20s ease-in-out;
+    -moz-transition: all 0.20s ease-in-out;
+    -ms-transition: all 0.20s ease-in-out;
+    -o-transition: all 0.20s ease-in-out;
+}
+
+.primary-button:hover {
+    background-color: #00C9AA;
+}
+
+.primary-button:disabled {
+    background-color: #DADBE3;
+    color: #AEB0BF;
+}
+
+.primary-button::first-letter {
+    text-transform: capitalize;
+}
+

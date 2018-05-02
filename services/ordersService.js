@@ -9,7 +9,7 @@ const insertOrder = async function (order) {
     const params =  [
                         order.orderId,
                         order.companyName,
-                        order.customerAdress,
+                        order.customerAddress,
                         order.orderedItem,
                         order.price,
                         order.currency

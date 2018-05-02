@@ -99,7 +99,7 @@
 			"description": "",
 			"data": [
 				{
-					"key": "customerAdress",
+					"key": "customerAddress",
 					"value": "Reeperbahn 153",
 					"description": "",
 					"type": "text",
@@ -259,7 +259,7 @@
 					"enabled": true
 				},
 				{
-					"key": "customerAdress",
+					"key": "customerAddress",
 					"value": "Reeperbahn 153",
 					"description": "",
 					"type": "text",

@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/matheuspavin/bGuru#readme",
   "dependencies": {
+    "angular": "^1.6.10",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "eslint": "^4.19.1",
     "express": "^4.16.3",
     "mocha": "^5.0.5",
     "sqlite": "^2.9.1"
